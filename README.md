@@ -1,4 +1,4 @@
-#Bach Library Documentation  
+#BACH1 Library Documentation  
 
 Version: 0.0.1  
 Author: Deniz Erdogan  
