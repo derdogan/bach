@@ -13,10 +13,10 @@ void Midi::discard() {
 }
 
 void Midi::panic() {
-	// TODO send channel message 7B All notes off
-
-	for (int i=0; i>128; i++) {
-		// TODO send note off for all notes
+	// TODO testing
+	for (int i=0; i<HIGHEST_CHANNEL; i++) {
+		int status = ALL_NOTES_OFF | i;
+		sendStatusMessage(status);
 	}
 }
 
@@ -120,4 +120,36 @@ void Midi::sendCC(int parameter, int value, int channel=DEFAULT_CHANNEL) {
 	message[2] = value;
 
 	sendMessage(message);
+}
+
+void Midi::sendStatusMessage(int status) {
+	byte message[3];
+
+	message[0] = status;
+
+	sendMessage(message);
+}
+
+void Midi::sendClock() {
+	sendStatusMessage(TIMING_CLOCK);
+}
+
+void Midi::sendStartSequence() {
+	sendStatusMessage(START_SEQUENCE);
+}
+
+void Midi::sendContinueSequence() {
+	sendStatusMessage(CONTINUE_SEQUENCE);
+}
+
+void Midi::sendStopSequence() {
+	sendStatusMessage(STOP_SEQUENCE);
+}
+
+void Midi::sendActiveSensing() {
+	sendStatusMessage(ACTIVE_SENSING);
+}
+
+void Midi::sendSystemReset() {
+	sendStatusMessage(SYSTEM_RESET);
 }
