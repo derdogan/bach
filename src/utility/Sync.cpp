@@ -3,7 +3,9 @@
 int Sync::_bpm = DEFAULT_BPM;
 
 void Sync::init() {
+    Timer1.initialize();
     Timer1.attachInterrupt(Sync::timerCallback);
+
     updateTimer();
 }
 
@@ -13,15 +15,19 @@ void Sync::timerCallback() {
 
 void Sync::updateTimer() {
     long clock = bpmToClock(_bpm);
-    Timer1.initialize(clock);
+    Timer1.setPeriod(clock);
 }
 
 long Sync::bpmToClock(int bpm) {
-    long clock = (long) bpm;
-    clock /= 120;
-    clock /= 25;
+    long double n, clock;
+    n = 1000000;
+    n /= 24; // 24 ppqn
 
-    return clock;
+    clock = bpm;
+    clock /= 60.0;
+    clock = n/clock;
+
+    return (long) clock;
 }
 
 bool Sync::changeTempo(int bpm) {
