@@ -2,8 +2,15 @@
 
 Version: 0.0.1  
 Author: Deniz Erdogan  
-Date: 7/27/2016
+Date: 2016-07-27
 
-A library used to create MIDI sequencer hardware with the Arduino.
+A WIP library built to create a MIDI hardware sequencer with the Arduino.
 
-It supports playing back MIDI sequences and can store it in the EEPROM, as well as using hardware parts like buttons and LEDs to display states and let the user control the device.
+## Planned features
+- MIDI sequence playback
+- MIDI clock sync
+- EEPROM storage (settings, patterns)
+- pattern chaining
+- LED control
+- LCD control
+- misc input control
