@@ -11,5 +11,6 @@
 #include "utility/Pattern.h"
 #include "utility/Memory.h"
 #include "utility/Midi.h"
+#include "utility/Sync.h"
 
 #endif
