@@ -29,11 +29,9 @@
 #define HIGHEST_VOICE_MESSAGE 		0xEF
 #define LOWEST_REALTIME_MESSAGE 	0xF8
 #define HIGHEST_REALTIME_MESSAGE 	0xFF
-#define HIGHEST_NOTE_OFF_MESSAGE 	0x8F
-#define HIGHEST_NOTE_ON_MESSAGE 	0x9F
 
 #define LOWEST_CHANNEL				0
-#define HIGHEST_CHANNEL				16
+#define HIGHEST_CHANNEL				15
 
 #define DEFAULT_CHANNEL				0
 
@@ -60,11 +58,20 @@ class Midi {
 		bool static isNoteOn(int data);
 		bool static isNoteOn();
 
-		void static setChannel(int channel);
+		bool static isNoteOff(int data);
+		bool static isNoteOff();
+
+		bool static isPitchBend(int data);
+		bool static isPitchBend();
+
+		bool static setChannel(int channel);
+
+		int static getChannel();
 		int static getNote();
 
 		void static sendCC(int parameter, int value, int channel);
 
+		void static discard();
 		void static panic();
 };
 

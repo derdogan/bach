@@ -6,6 +6,12 @@ void Midi::init() {
 	Serial.begin(MIDI_BAUD_RATE);
 }
 
+void Midi::discard() {
+	data[0] = 0;
+	data[1] = 0;
+	data[2] = 0;
+}
+
 void Midi::panic() {
 	// TODO send channel message 7B All notes off
 
@@ -18,9 +24,7 @@ void Midi::receive() {
 	if (Serial.available() > 0) {
 		Serial.readBytes(data, 3);
 	} else {
-		data[0] = 0;
-		data[1] = 0;
-		data[2] = 0;
+		discard();
 	}
 }
 
@@ -36,14 +40,26 @@ void Midi::send() {
 	}
 }
 
-void Midi::setChannel(int channel) {
+bool Midi::setChannel(int channel) {
 	if (channel >= LOWEST_CHANNEL && channel <= HIGHEST_CHANNEL) {
+		data[0] &= 0xF0;
 		data[0]	|= channel;
+
+		return true;
+	} else {
+		return false;
 	}
 }
 
+int Midi::getChannel() {
+	int channel = data[0];
+	channel &= 0xF;
+
+	return channel;
+}
+
 bool Midi::isNote(int data) {
-	if (data >= NOTE_OFF && data <= HIGHEST_NOTE_ON_MESSAGE) {
+	if (data >= NOTE_OFF && data <= (NOTE_ON | 0x0F)) {
 		return true;
 	} else {
 		return false;
@@ -55,7 +71,7 @@ bool Midi::isNote() {
 }
 
 bool Midi::isNoteOn(int data) {
-	if (data >= NOTE_ON && data <= HIGHEST_NOTE_ON_MESSAGE) {
+	if (data >= NOTE_ON && data <= (NOTE_ON | 0x0F)) {
 		return true;
 	} else {
 		return false;
@@ -64,6 +80,30 @@ bool Midi::isNoteOn(int data) {
 
 bool Midi::isNoteOn() {
 	return isNoteOn(data[0]);
+}
+
+bool Midi::isNoteOff(int data) {
+	if (data >= NOTE_OFF && data <= (NOTE_OFF | 0x0F)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool Midi::isNoteOff() {
+	return isNoteOff(data[0]);
+}
+
+bool Midi::isPitchBend(int data) {
+	if (data >= PITCH_BEND && data <= (PITCH_BEND | 0x0F)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool Midi::isPitchBend() {
+	return isPitchBend(data[0]);
 }
 
 int Midi::getNote() {
