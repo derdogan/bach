@@ -11,6 +11,7 @@ void Sync::init() {
 
 void Sync::timerCallback() {
     Midi::sendClock();
+    Sequencer::tick();
 }
 
 void Sync::updateTimer() {

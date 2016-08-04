@@ -1,5 +1,5 @@
 /*
- * Sync.h - Execute timed events.
+ * Sync.h - Synchronize the internal sequencer and external devices (through MIDI clock signals) via a BPM value
  *
  * Created by Deniz Erdogan, 3. August 2016
  */
