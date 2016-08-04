@@ -103,6 +103,9 @@ class Midi {
 		void static sendActiveSensing();
 		void static sendSystemReset();
 
+		void static start();
+		void static stop();
+		
 		void static discard();
 		void static panic();
 };

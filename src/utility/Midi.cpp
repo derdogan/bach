@@ -28,9 +28,13 @@ void Midi::receive() {
 	}
 }
 
+void Midi::write(int message) {
+	Serial.write(message);
+}
+
 void Midi::sendMessage(byte* message) {
 	for (int i=0; i<3; i++) {
-		Serial.write(message[i]);
+		write(message[i]);
 	}
 }
 
@@ -38,6 +42,10 @@ void Midi::send() {
 	if (data[0] > 0) {
 		sendMessage(data);
 	}
+}
+
+void Midi::sendStatusMessage(int status) {
+	Serial.write(status);
 }
 
 bool Midi::setChannel(int channel) {
@@ -122,14 +130,6 @@ void Midi::sendCC(int parameter, int value, int channel=DEFAULT_CHANNEL) {
 	sendMessage(message);
 }
 
-void Midi::sendStatusMessage(int status) {
-	byte message[3];
-
-	message[0] = status;
-
-	sendMessage(message);
-}
-
 void Midi::sendClock() {
 	sendStatusMessage(TIMING_CLOCK);
 }
@@ -152,4 +152,12 @@ void Midi::sendActiveSensing() {
 
 void Midi::sendSystemReset() {
 	sendStatusMessage(SYSTEM_RESET);
+}
+
+void Midi::start() {
+	sendStartSequence();
+}
+
+void Midi::stop() {
+	sendStopSequence();
 }
