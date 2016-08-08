@@ -42,6 +42,13 @@ void Sequencer::triggerStep() {
             // TODO
         }
     }
+
+    _step++;
+
+    if (_step >= SEQ_STEPS) {
+        _step = 0;
+    }
+
 }
 
 bool Sequencer::loadPattern(int id) {
