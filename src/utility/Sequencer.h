@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "Midi.h"
+#include "Sync.h"
 #include "Pattern.h"
 
 #define SEQ_STEPS           16
