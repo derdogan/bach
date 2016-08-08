@@ -143,7 +143,7 @@
 
 // "special" notes
 #define NOTE_LEGATO 127
-#define NOTE_BLANK  0b00110000; // "default" note; muted C4
+#define NOTE_BLANK  0b00000000
 
 class Notes {
     private:

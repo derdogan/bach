@@ -62,6 +62,10 @@ class Pattern {
 		static bool validNoteOffset(int offset);
 
 		static bool getNotes(int step, byte* notes, byte* pattern);
+
+		static bool isNoteMuted(int note);
+		static bool turnNoteOn(int offset, byte* pattern);
+		static bool turnNoteOff(int offset, byte* pattern);
 };
 
 #endif

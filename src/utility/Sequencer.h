@@ -22,13 +22,15 @@ class Sequencer {
         int static _channel;
         int static _velocity;
 
-        byte static _pattern[PATTERN_LENGTH];
+        int static _noteModifier;
 
         int static  _step;
         byte static _stepNotes[STEP_NOTES];
         byte static _oldStepNotes[STEP_NOTES];
 
     public:
+        byte static _pattern[PATTERN_LENGTH];
+
         void static tick();
         void static start();
         void static stop();
@@ -36,6 +38,14 @@ class Sequencer {
         void static triggerStep();
 
         bool static loadPattern(int id);
+
+        int static getVelocity();
+        void static setVelocity(int velocity);
+
+        int static getNoteModifier();
+        void static setNoteModifier(int modifier);
+
+        int static getStep();
 };
 
 #endif

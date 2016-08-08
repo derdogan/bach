@@ -6,6 +6,7 @@ bool Sequencer::_playing = false;
 int Sequencer::_step = 0;
 int Sequencer::_channel = 0;
 int Sequencer::_velocity = 127;
+int Sequencer::_noteModifier = 0;
 
 byte Sequencer::_pattern[PATTERN_LENGTH]    = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 byte Sequencer::_stepNotes[STEP_NOTES]      = {0, 0, 0, 0};
@@ -32,14 +33,16 @@ void Sequencer::stop() {
 }
 
 void Sequencer::triggerStep() {
+    for (int i=0; i<STEP_NOTES; i++) {
+        Midi::noteOff(_stepNotes[i], _velocity, _channel);
+    }
+
     Pattern::getNotes(_step, _stepNotes, _pattern);
 
     for (int i=0; i<STEP_NOTES; i++) {
-        if (_stepNotes[i] != _oldStepNotes[i]) {
-            Midi::noteOff(_oldStepNotes[i], _velocity, _channel);
-            Midi::noteOn(_stepNotes[i], _velocity, _channel);
-        } else {
-            // TODO
+        if (! Pattern::isNoteMuted(_stepNotes[i])) {
+            int note = _stepNotes[i] + _noteModifier;
+            Midi::noteOn(note, _velocity, _channel);
         }
     }
 
@@ -48,7 +51,6 @@ void Sequencer::triggerStep() {
     if (_step >= SEQ_STEPS) {
         _step = 0;
     }
-
 }
 
 bool Sequencer::loadPattern(int id) {
@@ -62,4 +64,24 @@ bool Sequencer::loadPattern(int id) {
     }
 
     return false;
+}
+
+int Sequencer::getVelocity() {
+    return _velocity;
+}
+
+void Sequencer::setVelocity(int velocity) {
+    _velocity = velocity;
+}
+
+int Sequencer::getNoteModifier() {
+    return _noteModifier;
+}
+
+void Sequencer::setNoteModifier(int modifier) {
+    _noteModifier = modifier;
+}
+
+int Sequencer::getStep() {
+    return _step;
 }

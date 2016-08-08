@@ -10,6 +10,7 @@ void Sync::init() {
 }
 
 void Sync::timerCallback() {
+    // TODO sync divider/multiplier
     Midi::sendClock();
     Sequencer::tick();
 }
@@ -41,4 +42,8 @@ bool Sync::changeTempo(int bpm) {
     } else {
         return false;
     }
+}
+
+int Sync::getTempo() {
+    return _bpm;
 }

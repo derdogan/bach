@@ -29,6 +29,8 @@ class Sync {
 
         long static bpmToClock(int bpm);
         bool static changeTempo(int bpm);
+
+        int static getTempo();
 };
 
 #endif
