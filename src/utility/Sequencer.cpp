@@ -13,7 +13,8 @@ byte Sequencer::_stepNotes[STEP_NOTES]      = {0, 0, 0, 0};
 byte Sequencer::_oldStepNotes[STEP_NOTES]   = {0, 0, 0, 0};
 
 void Sequencer::tick() {
-    if (_clock < SEQ_CLOCK_END) {
+    // TODO real sync to MIDI clocj
+    if (_clock < 11) {
         _clock++;
     } else {
         _clock = SEQ_CLOCK_START;
