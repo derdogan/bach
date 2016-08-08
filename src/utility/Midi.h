@@ -105,7 +105,10 @@ class Midi {
 
 		void static start();
 		void static stop();
-		
+
+		void static noteOn(int note, int velocity, int channel);
+		void static noteOff(int note, int velocity, int channel);
+
 		void static discard();
 		void static panic();
 };

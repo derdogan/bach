@@ -12,5 +12,6 @@
 #include "utility/Memory.h"
 #include "utility/Midi.h"
 #include "utility/Sync.h"
+#include "utility/Sequencer.h"
 
 #endif

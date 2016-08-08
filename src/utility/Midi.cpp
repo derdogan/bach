@@ -118,6 +118,30 @@ int Midi::getNote() {
 	return data[1];
 }
 
+void Midi::noteOn(int note, int velocity, int channel) {
+	byte message[3];
+
+	message[0] = NOTE_ON;
+	message[0] |= channel;
+
+	message[1] = note;
+	message[2] = velocity;
+
+	sendMessage(message);
+}
+
+void Midi::noteOff(int note, int velocity, int channel) {
+	byte message[3];
+
+	message[0] = NOTE_OFF;
+	message[0] |= channel;
+
+	message[1] = note;
+	message[2] = velocity;
+
+	sendMessage(message);
+}
+
 void Midi::sendCC(int parameter, int value, int channel=DEFAULT_CHANNEL) {
 	byte message[3];
 

@@ -10,6 +10,7 @@
 #include "Arduino.h"
 #include "TimerOne.h"
 #include "Midi.h"
+#include "Sequencer.h"
 
 #define MIN_BPM         10
 #define MAX_BPM         510
