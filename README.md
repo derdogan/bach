@@ -1,10 +1,10 @@
-#BACH1 Library Documentation  
+#BACH Library Documentation  
 
 Version: 0.0.1  
 Author: Deniz Erdogan  
 Date: 2016-07-27
 
-A WIP library built to create a MIDI hardware sequencer with the Arduino.
+A WIP library built to create a MIDI hardware sequencer with an Arduino microcontroller board.
 
 ## Planned features
 - MIDI sequence playback
@@ -13,4 +13,4 @@ A WIP library built to create a MIDI hardware sequencer with the Arduino.
 - pattern chaining
 - LED control
 - LCD control
-- misc input control
+- misc input control (buttons, encoders)
